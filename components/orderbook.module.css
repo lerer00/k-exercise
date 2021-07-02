@@ -1,13 +1,73 @@
 .orderbook {
+    width: 800px;
     font-family: 'Roboto', sans-serif;
     position: relative;
     background-color: #111827;
     color: #b1b4ba;
+    margin: 16px auto;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions {
+    padding-top: 16px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select {
+    background-color: #b1b4ba;
+    padding: 0 16px;
+    border-radius: 3px;
+}
+
+.loading {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.loading img {
+    width: 48px;
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .orderbook h1 {
+    position: relative;
     font-size: 1em;
-    padding-left: 16px;
+    margin: 0;
 }
 
 .orderbook .dom {
@@ -16,6 +76,7 @@
     width: 800px;
     background-color: #111827;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
     padding: 8px;
 }

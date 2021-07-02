@@ -16,12 +16,11 @@ const OrderbookDepthRow: FunctionComponent<Props> = ({ size, price, depth, maxDe
                 <span className={styles.highest} style={{ width: ((depth) / maxDepth * 100).toString() + '%' }}></span>
                 <span>{depth}</span>
                 <span>{size}</span>
-                <span className={styles.price}>{price}</span>
+                <span className={styles.price}>{price.toFixed(2)}</span>
             </div>}
             {inverted && <div className={`${styles.row} ${styles.inverted}`}>
-                {/* {console.log(((depth) / maxDepth * 100).toString())} */}
                 <span className={styles.highest} style={{ width: ((depth) / maxDepth * 100).toString() + '%' }}></span>
-                <span className={styles.price}>{price}</span>
+                <span className={styles.price}>{price.toFixed(2)}</span>
                 <span>{size}</span>
                 <span>{depth}</span>
             </div>}
