@@ -28,6 +28,7 @@ export type OrderbookContextType = {
     bids: OrderbookPriceType[];
     asks: OrderbookPriceType[];
     depth: number;
+    mobile: boolean;
 }
 
 export const initialOrderbookContext: OrderbookContextType = {
@@ -37,6 +38,7 @@ export const initialOrderbookContext: OrderbookContextType = {
     bids: [],
     asks: [],
     depth: 0,
+    mobile: false
 }
 
 export default React.createContext<OrderbookContextType>(initialOrderbookContext);

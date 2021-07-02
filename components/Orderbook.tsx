@@ -6,6 +6,7 @@ import OrderbookContext, { initialOrderbookContext, markets, OrderbookPriceType 
 import OrderbookDepthAsks from './OrderbookDepthAsks';
 import OrderbookDepthBids from './OrderbookDepthBids';
 import { ascNumberArray, ascOrderbookPrice, descNumberArray, descOrderbookPrice } from '../utilities/sort';
+import { useResizeDetector } from 'react-resize-detector';
 
 interface Props {
 }
@@ -24,6 +25,8 @@ const Orderbook: FunctionComponent<Props> = () => {
     const [depth, setDepth] = useState(initialOrderbookContext.depth);
     const [lastMessage, setLastMessage] = useState(null);
     const [socketState, setSocketState] = useState(SOCKET_STATE.LOADING);
+    const [mobile, setMobile] = useState(false);
+    const { width: orderbookWidth, height: orderbookHeight, ref: orderbookRef } = useResizeDetector();
     const webSocket: any = useRef(null);
 
     const initWebSocket = () => {
@@ -203,14 +206,26 @@ const Orderbook: FunctionComponent<Props> = () => {
         }
     }, [lastMessage])
 
+    useEffect(() => {
+        if (orderbookWidth === undefined) {
+            setMobile(false);
+        } else {
+            if (orderbookWidth < 800) {
+                setMobile(true);
+            } else {
+                setMobile(false);
+            }
+        }
+    }, [orderbookWidth]);
+
     return (
         <>
-            <OrderbookContext.Provider value={{ market: market, grouping: grouping, handleChangeGrouping: handleChangeGrouping, asks: asks, bids: bids, depth: depth }}>
+            <OrderbookContext.Provider value={{ market: market, grouping: grouping, handleChangeGrouping: handleChangeGrouping, asks: asks, bids: bids, depth: depth, mobile: mobile }}>
                 <div className={styles.actions}>
                     <Button color="primary" variant="contained" onClick={toggleFeed}><Image width={24} height={24} src={'/images/toggle-feed.svg'} alt={'toggle feed button'} /> Toggle Feed</Button>
                     <Button color="secondary" variant="contained" onClick={killFeed}><Image width={24} height={24} src={'/images/kill-feed.svg'} alt={'kill feed button'} /> Kill Feed</Button>
                 </div>
-                <div className={styles.orderbook}>
+                <div ref={orderbookRef} className={styles.orderbook}>
                     <div className={styles.header}>
                         <h1>Order Book</h1>
                         <FormControl>
@@ -233,7 +248,7 @@ const Orderbook: FunctionComponent<Props> = () => {
                                 <div className={styles.asks}>
                                     <OrderbookDepthAsks />
                                 </div>
-                                <div className={styles.bids}>
+                                <div className={`${styles.bids} ${mobile ? styles.invert : ""}`}>
                                     <OrderbookDepthBids />
                                 </div>
                             </>

@@ -43,11 +43,11 @@ const OrderbookDepthAsks: FunctionComponent<Props> = () => {
     return (
         <>
             <div className={styles.orderbook_depth}>
-                <div className={styles.headers}>
+                {!context.mobile && <div className={styles.headers}>
                     <span>Total</span>
                     <span>Size</span>
                     <span>Price</span>
-                </div>
+                </div>}
                 <div>
                     {context.asks.length > 0 && <div>
                         {group().map((p: OrderbookPriceType, i: number) => {

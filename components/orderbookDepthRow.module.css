@@ -14,13 +14,19 @@
     top: 0;
     right: 0;
     height: 100%;
+}
+
+.green {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.red {
     background-color: rgba(255, 0, 0, 0.1);
 }
 
 .inverted .highest {
     left: 0;
     right: auto;
-    background-color: rgba(0, 255, 0, 0.1);
 }
 
 .row .price {

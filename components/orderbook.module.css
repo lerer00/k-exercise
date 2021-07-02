@@ -70,7 +70,7 @@
     margin: 0;
 }
 
-.orderbook .dom {
+.dom {
     border-top: solid 1px #242d3c;
     position: relative;
     width: 800px;
@@ -79,4 +79,19 @@
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     padding: 8px;
+}
+
+.invert {
+    grid-row: 1;
+}
+
+@media only screen and (max-width: 800px) {
+    .orderbook {
+        width: 100%;
+    }
+    .dom {
+        width: 100%;
+        grid-auto-flow: dense;
+        row-gap: 8px;
+    }
 }

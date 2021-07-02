@@ -37,7 +37,11 @@ const OrderbookDepthBids: FunctionComponent<Props> = () => {
             }
         }
 
-        return groupAsks;
+        if (context.mobile) {
+            return groupAsks.reverse();
+        } else {
+            return groupAsks;
+        }
     }
 
     return (
@@ -51,7 +55,7 @@ const OrderbookDepthBids: FunctionComponent<Props> = () => {
                 <div>
                     {context.bids.length > 0 && <div>
                         {group().map((p: OrderbookPriceType, i: number) => {
-                            return <OrderbookDepthRow key={i} size={p.size} price={p.price} depth={findDepth(context.bids, p.price)} maxDepth={context.depth} inverted={true} />
+                            return <OrderbookDepthRow key={i} size={p.size} price={p.price} depth={findDepth(context.bids, p.price)} green maxDepth={context.depth} inverted={!context.mobile} />
                         })}
                     </div>}
                 </div>
