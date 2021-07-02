@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import styles from './orderbook.module.css';
-import React, { FunctionComponent, SyntheticEvent, useEffect, useRef, useState } from 'react';
-import { Button, FormControl, makeStyles, MenuItem, Select } from '@material-ui/core';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { Button, FormControl, MenuItem, Select } from '@material-ui/core';
 import OrderbookContext, { initialOrderbookContext, markets, OrderbookPriceType } from '../contexts/orderbookContext';
 import OrderbookDepthAsks from './OrderbookDepthAsks';
 import OrderbookDepthBids from './OrderbookDepthBids';
@@ -206,8 +207,8 @@ const Orderbook: FunctionComponent<Props> = () => {
         <>
             <OrderbookContext.Provider value={{ market: market, grouping: grouping, handleChangeGrouping: handleChangeGrouping, asks: asks, bids: bids, depth: depth }}>
                 <div className={styles.actions}>
-                    <Button color="primary" variant="contained" onClick={toggleFeed}><img src={'./images/toggle-feed.svg'} alt={'toggle feed button'} /> Toggle Feed</Button>
-                    <Button color="secondary" variant="contained" onClick={killFeed}><img src={'./images/kill-feed.svg'} alt={'kill feed button'} /> Kill Feed</Button>
+                    <Button color="primary" variant="contained" onClick={toggleFeed}><Image width={24} height={24} src={'/images/toggle-feed.svg'} alt={'toggle feed button'} /> Toggle Feed</Button>
+                    <Button color="secondary" variant="contained" onClick={killFeed}><Image width={24} height={24} src={'/images/kill-feed.svg'} alt={'kill feed button'} /> Kill Feed</Button>
                 </div>
                 <div className={styles.orderbook}>
                     <div className={styles.header}>
@@ -239,13 +240,13 @@ const Orderbook: FunctionComponent<Props> = () => {
                         }
                         {socketState === SOCKET_STATE.CLOSED && <div className={styles.bids}>
                             <div className={styles.loading}>
-                                <img src={'./images/loading.svg'} alt={'loading image'} />
+                                <Image width={24} height={24} src={'/images/loading.svg'} alt={'loading image'} />
                                 <p>Yeah Sorry looks like the feed is broken!</p>
                             </div>
                         </div>}
                         {socketState === SOCKET_STATE.LOADING && <div className={styles.bids}>
                             <div className={styles.loading}>
-                                <img src={'./images/loading.svg'} alt={'loading image'} />
+                                <Image width={24} height={24} src={'/images/loading.svg'} alt={'loading image'} />
                                 <p>Connecting to feed...</p>
                             </div>
                         </div>}
